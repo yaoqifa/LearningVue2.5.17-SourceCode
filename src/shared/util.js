@@ -1,5 +1,6 @@
 /* @flow */
 
+// qifa 用Object.seal()密封的对象可以改变它们现有的属性。使用Object.freeze() 冻结的对象中现有属性是不可变的。
 export const emptyObject = Object.freeze({})
 
 // these helpers produces better vm code in JS engines due to their
