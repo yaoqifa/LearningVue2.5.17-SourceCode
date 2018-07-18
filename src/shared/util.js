@@ -75,6 +75,7 @@ export function isValidArrayIndex (val: any): boolean {
 /**
  * Convert a value to a string that is actually rendered.
  */
+// qifa JSON.stringify(val, null, 2) 2是space，用于美化输出
 export function toString (val: any): string {
   return val == null
     ? ''
@@ -96,6 +97,7 @@ export function toNumber (val: string): number | string {
  * Make a map and return a function for checking if a key
  * is in that map.
  */
+// qifa 这个方法返回一个方法，返回的方法用于判断传入的参数在不在map里，map由str组成，str如：'slot,component',如 'attrs,class,staticClass,staticStyle,key'
 export function makeMap (
   str: string,
   expectsLowerCase?: boolean
@@ -143,6 +145,7 @@ export function hasOwn (obj: Object | Array<*>, key: string): boolean {
 /**
  * Create a cached version of a pure function.
  */
+// qifa 缓存一些结果，则不用二次执行fn(str), 优化性能，这是一个包装函数啊
 export function cached<F: Function> (fn: F): F {
   const cache = Object.create(null)
   return (function cachedFn (str: string) {
@@ -154,6 +157,7 @@ export function cached<F: Function> (fn: F): F {
 /**
  * Camelize a hyphen-delimited string.
  */
+// qifa 将连字符的转化为驼峰 比如： create-functional-component 转成 createFunctionalComponent
 const camelizeRE = /-(\w)/g
 export const camelize = cached((str: string): string => {
   return str.replace(camelizeRE, (_, c) => c ? c.toUpperCase() : '')
@@ -201,6 +205,7 @@ function nativeBind (fn: Function, ctx: Object): Function {
   return fn.bind(ctx)
 }
 
+// qifa 提供更安全的bind
 export const bind = Function.prototype.bind
   ? nativeBind
   : polyfillBind
@@ -208,6 +213,7 @@ export const bind = Function.prototype.bind
 /**
  * Convert an Array-like object to a real Array.
  */
+
 export function toArray (list: any, start?: number): Array<any> {
   start = start || 0
   let i = list.length - start
@@ -314,6 +320,7 @@ export function looseIndexOf (arr: Array<mixed>, val: mixed): number {
 /**
  * Ensure a function is called only once.
  */
+// qifa 都用到了闭包
 export function once (fn: Function): Function {
   let called = false
   return function () {
