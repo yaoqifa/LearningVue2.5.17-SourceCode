@@ -3,6 +3,7 @@
 /**
  * Check if a string starts with $ or _
  */
+// qifa 以 $ 或 _ 开头的字符串会被认为是保留字符 (str + '') 转化为字符串
 export function isReserved (str: string): boolean {
   const c = (str + '').charCodeAt(0)
   return c === 0x24 || c === 0x5F
