@@ -320,7 +320,7 @@ export function looseIndexOf (arr: Array<mixed>, val: mixed): number {
 /**
  * Ensure a function is called only once.
  */
-// qifa 都用到了闭包
+// qifa 都用到了闭包,函数式编程，高阶函数了解下
 export function once (fn: Function): Function {
   let called = false
   return function () {
