@@ -113,7 +113,7 @@ export function renderMixin (Vue: Class<Component>) {
         vm.$slots[key]._rendered = false
       }
     }
-
+    // qifa 如果是组件渲染的话，_parentVnode就是当前组件的父VNode
     if (_parentVnode) {
       vm.$scopedSlots = _parentVnode.data.scopedSlots || emptyObject
     }
@@ -158,6 +158,7 @@ export function renderMixin (Vue: Class<Component>) {
       vnode = createEmptyVNode()
     }
     // set parent
+    // qifa 形成一种父子关系
     vnode.parent = _parentVnode
     return vnode
   }

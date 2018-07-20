@@ -211,9 +211,9 @@ export function createComponentInstanceForVnode (
   parent: any, // activeInstance in lifecycle state
 ): Component {
   const options: InternalComponentOptions = {
-    _isComponent: true,
+    _isComponent: true, // 是组件
     _parentVnode: vnode,
-    parent
+    parent // 表示当前激活的组件实例
   }
   // check inline-template render functions
   const inlineTemplate = vnode.data.inlineTemplate
@@ -221,6 +221,7 @@ export function createComponentInstanceForVnode (
     options.render = inlineTemplate.render
     options.staticRenderFns = inlineTemplate.staticRenderFns
   }
+  // vnode.componentOptions.Ctor 对应子组件的构造函数，相当于new Sub(options)
   return new vnode.componentOptions.Ctor(options)
 }
 
