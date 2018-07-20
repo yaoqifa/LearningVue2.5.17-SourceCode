@@ -221,6 +221,7 @@ export function createPatchFunction (backend) {
       // in that case we can just return the element and be done.
       if (isDef(vnode.componentInstance)) {
         initComponent(vnode, insertedVnodeQueue)
+        // qifa 最后完成组件的DOM插入
         insert(parentElm, vnode.elm, refElm)
         if (isTrue(isReactivated)) {
           reactivateComponent(vnode, insertedVnodeQueue, parentElm, refElm)
@@ -697,6 +698,7 @@ export function createPatchFunction (backend) {
     if (isUndef(oldVnode)) {
       // empty mount (likely as component), create new root element
       isInitialPatch = true
+      // qifa 负责渲染成DOM的函数
       createElm(vnode, insertedVnodeQueue)
     } else {
       // qifa 有nodeType属性，证明是一个真实的dom节点

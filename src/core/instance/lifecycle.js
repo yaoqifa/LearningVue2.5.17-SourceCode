@@ -18,6 +18,9 @@ import {
   validateProp
 } from '../util/index'
 
+// qifa 这个 activeInstance 作用就是保持当前上下文的 Vue 实例，它是在 lifecycle 模块的全局变量，定义是 export let activeInstance: any = null，
+// 并且在之前我们调用 createComponentInstanceForVnode 方法的时候从 lifecycle 模块获取，并且作为参数传入的。因为实际上 JavaScript 是一个单线程，
+// Vue 整个初始化是一个深度遍历的过程，在实例化子组件的过程中，它需要知道当前上下文的 Vue 实例是什么，并把它作为子组件的父 Vue 实例
 export let activeInstance: any = null
 export let isUpdatingChildComponent: boolean = false
 
@@ -33,6 +36,7 @@ export function initLifecycle (vm: Component) {
   const options = vm.$options
 
   // locate first non-abstract parent
+  // qifa vm.$parent 就是用来保留当前 vm 的父实例，并且通过 parent.$children.push(vm) 来把当前的 vm 存储到父实例的 $children 中
   let parent = options.parent
   if (parent && !options.abstract) {
     while (parent.$options.abstract && parent.$parent) {
@@ -62,9 +66,11 @@ export function lifecycleMixin (Vue: Class<Component>) {
   Vue.prototype._update = function (vnode: VNode, hydrating?: boolean) {
     const vm: Component = this
     const prevEl = vm.$el
-    const prevVnode = vm._vnode
+    const prevVnode = vm._vnode // qifa 则prevVnode 是vm的子
     const prevActiveInstance = activeInstance
+    // qifa activeInstance 就是当前的组件对象
     activeInstance = vm
+    // qifa 这里的vnode是通过vm._render()函数返回的VNode，如果是组件渲染VNode的话，vm._vnode(子) 和vm.$vnode（父） 是父子关系，
     vm._vnode = vnode
     // Vue.prototype.__patch__ is injected in entry points
     // based on the rendering backend used.
@@ -74,6 +80,7 @@ export function lifecycleMixin (Vue: Class<Component>) {
       vm.$el = vm.__patch__(vm.$el, vnode, hydrating, false /* removeOnly */)
     } else {
       // updates
+      // qifa patch子组件的过程，是一种深度遍历
       vm.$el = vm.__patch__(prevVnode, vnode)
     }
     activeInstance = prevActiveInstance
