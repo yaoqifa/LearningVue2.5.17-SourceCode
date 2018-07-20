@@ -37,6 +37,7 @@ export function initMixin (Vue: Class<Component>) {
     // a flag to avoid this being observed
     vm._isVue = true
     // merge options
+    // qifa 组件的话，_isComponent 为true
     if (options && options._isComponent) {
       // optimize internal component instantiation 优化内部组件实例
       // since dynamic options merging is pretty slow, and none of the 因为动态options的合并非常慢
@@ -86,6 +87,7 @@ export function initInternalComponent (vm: Component, options: InternalComponent
   const opts = vm.$options = Object.create(vm.constructor.options)
   // doing this because it's faster than dynamic enumeration.
   const parentVnode = options._parentVnode
+  // qifa 如果是组件的话，会合并一些options，比如parent
   opts.parent = options.parent
   opts._parentVnode = parentVnode
 
