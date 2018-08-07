@@ -133,7 +133,7 @@ function resolveModifiedOptions (Ctor: Class<Component>): ?Object {
   const extended = Ctor.extendOptions
   const sealed = Ctor.sealedOptions
   for (const key in latest) {
-    if (latest[key] !== sealed[key]) {
+    if (latest[key] !== sealed[key]) { 
       if (!modified) modified = {}
       modified[key] = dedupe(latest[key], extended[key], sealed[key])
     }

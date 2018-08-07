@@ -224,6 +224,7 @@ export function mountComponent (
 
   // manually mounted instance, call mounted on self
   // mounted is called for render-created child components in its inserted hook
+  // $vnode是父级，如果null则表示 根，调用mounted
   if (vm.$vnode == null) {
     vm._isMounted = true
     callHook(vm, 'mounted')
@@ -337,7 +338,7 @@ export function deactivateChildComponent (vm: Component, direct?: boolean) {
     callHook(vm, 'deactivated')
   }
 }
-
+// qifa 调用生命周期的方法
 export function callHook (vm: Component, hook: string) {
   // #7573 disable dep collection when invoking lifecycle hooks
   pushTarget()
@@ -345,7 +346,7 @@ export function callHook (vm: Component, hook: string) {
   if (handlers) {
     for (let i = 0, j = handlers.length; i < j; i++) {
       try {
-        // qifa 调用,vm作为handlers[i]的上下文，比如 beforeCreate，但为什么是个数组？
+        // qifa 调用,vm作为handlers[i]的上下文，比如 beforeCreate，但为什么是个数组？（从子到父）
         handlers[i].call(vm)
       } catch (e) {
         handleError(e, vm, `${hook} hook`)

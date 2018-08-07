@@ -7,6 +7,7 @@ export function initAssetRegisters (Vue: GlobalAPI) {
   /**
    * Create asset registration methods.
    */
+  // qifa Vue.component('app', App)
   ASSET_TYPES.forEach(type => {
     Vue[type] = function (
       id: string,
@@ -21,6 +22,7 @@ export function initAssetRegisters (Vue: GlobalAPI) {
         }
         if (type === 'component' && isPlainObject(definition)) {
           definition.name = definition.name || id
+          // qifa this.options._base 就是Vue， .extend 转化成构造函数
           definition = this.options._base.extend(definition)
         }
         if (type === 'directive' && typeof definition === 'function') {
