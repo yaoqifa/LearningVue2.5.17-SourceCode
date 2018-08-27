@@ -154,7 +154,7 @@ export function defineReactive (
   if ((!getter || setter) && arguments.length === 2) {
     val = obj[key]
   }
-
+  // qifa 递归变成observe
   let childOb = !shallow && observe(val)
   Object.defineProperty(obj, key, {
     enumerable: true,
