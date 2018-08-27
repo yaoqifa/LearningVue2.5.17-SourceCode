@@ -34,6 +34,7 @@ export function toggleObserving (value: boolean) {
  * object's property keys into getter/setters that
  * collect dependencies and dispatch updates.
  */
+// qifa Observer 是一个类，它的作用是给对象的属性添加 getter 和 setter，用于依赖收集和派发更新
 export class Observer {
   value: any;
   dep: Dep;
@@ -43,6 +44,7 @@ export class Observer {
     this.value = value
     this.dep = new Dep()
     this.vmCount = 0
+    // qifa 这样 value.__ob__ 就是this, 所以平时vue的data上的对象类型数据都有一个__ob__属性
     def(value, '__ob__', this)
     if (Array.isArray(value)) {
       const augment = hasProto
@@ -128,9 +130,10 @@ export function observe (value: any, asRootData: ?boolean): Observer | void {
   return ob
 }
 
-/**
+/** 
  * Define a reactive property on an Object.
  */
+// qifa 定义一个响应式对象，给对象动态添加 getter 和 setter
 export function defineReactive (
   obj: Object,
   key: string,
