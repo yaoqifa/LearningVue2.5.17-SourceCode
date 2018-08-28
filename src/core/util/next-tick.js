@@ -115,6 +115,7 @@ export function withMacroTask (fn: Function): Function {
 export function nextTick (cb?: Function, ctx?: Object) {
   let _resolve
   callbacks.push(() => {
+    // qifa 用try catch 防止某个cb出错，整个程序崩了
     if (cb) {
       try {
         cb.call(ctx)
