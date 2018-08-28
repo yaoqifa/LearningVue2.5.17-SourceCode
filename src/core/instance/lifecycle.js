@@ -213,6 +213,7 @@ export function mountComponent (
   // since the watcher's initial patch may call $forceUpdate (e.g. inside child
   // component's mounted hook), which relies on vm._watcher being already defined
   // qifa 渲染 watcher 记住，在这个回调里执行 updateComponent， updateComponent方法里最重要的就是 vm._update() 和 vm._render()
+  // qifa 进入到watcher里
   new Watcher(vm, updateComponent, noop, {
     before () {
       if (vm._isMounted) {

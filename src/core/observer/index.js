@@ -161,6 +161,7 @@ export function defineReactive (
     configurable: true,
     get: function reactiveGetter () {
       const value = getter ? getter.call(obj) : val
+      // qifa 这里就是做依赖的收集
       if (Dep.target) {
         dep.depend()
         if (childOb) {

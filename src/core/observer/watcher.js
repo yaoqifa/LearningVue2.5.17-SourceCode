@@ -142,6 +142,7 @@ export default class Watcher {
   /**
    * Clean up for dependency collection.
    */
+  // qifa 优化性能，避免不必要的重新渲染，，比如v-if里 进入v-else逻辑时 改变数据会触发getter然后重新渲染，但不影响v-if里的数据
   cleanupDeps () {
     let i = this.deps.length
     while (i--) {

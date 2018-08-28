@@ -29,6 +29,7 @@ export default class Dep {
 
   depend () {
     if (Dep.target) {
+      // qifa 所以去看watch 的 addDep方法
       Dep.target.addDep(this)
     }
   }
