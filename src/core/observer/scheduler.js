@@ -145,6 +145,7 @@ export function queueWatcher (watcher: Watcher) {
     // queue the flush
     if (!waiting) {
       waiting = true
+      // qifa 进入util next-tick.js 看看
       nextTick(flushSchedulerQueue)
     }
   }

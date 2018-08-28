@@ -16,6 +16,15 @@
     // DOM 更新了
   })
 
+  平时在开发的过程中，比如从服务端接口去获取数据的时候，数据做了修改，如果我们的某些方法去依赖了数据修改后的 DOM 变化，我们就必须在 nextTick 后执行。
+
+    getData(res).then(()=>{
+    this.xxx = res.data
+    this.$nextTick(() => {
+      // 这里我们可以获取变化后的 DOM
+    })
+  })
+
 */
 import { noop } from 'shared/util'
 import { handleError } from './error'
@@ -118,6 +127,7 @@ export function nextTick (cb?: Function, ctx?: Object) {
   })
   if (!pending) {
     pending = true
+    // qifa 这两个函数都会在下个tick执行 flushCallbacks， 就是对callbacks遍历，执行相应的回调函数
     if (useMacroTask) {
       macroTimerFunc()
     } else {
