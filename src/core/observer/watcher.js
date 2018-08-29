@@ -91,6 +91,7 @@ export default class Watcher {
       }
     }
     if (this.computed) {
+      // qifa 如果是computed watcher ，不会立即求值，
       this.value = undefined
       this.dep = new Dep()
     } else {
