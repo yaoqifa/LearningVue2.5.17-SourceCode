@@ -297,6 +297,7 @@ function initWatch (vm: Component, watch: Object) {
   }
 }
 
+// qifa 对数据的规范化
 function createWatcher (
   vm: Component,
   expOrFn: string | Function,

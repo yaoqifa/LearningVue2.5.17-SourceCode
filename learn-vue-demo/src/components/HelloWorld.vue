@@ -5,6 +5,8 @@
     <p>lastName: {{lastName}}</p>
     <p>fullName: {{fullName}}</p>
     <button @click="changeLastName">change last</button>
+    <button @click="change">change nested</button>
+
   </div>
 </template>
 
@@ -14,7 +16,12 @@ export default {
   data () {
     return {
       firstName: 'jhs',
-      lastName: '123'
+      lastName: '123',
+      nested: {
+        a: {
+          b: 1
+        }
+      }
     }
   },
   props: {
@@ -28,6 +35,18 @@ export default {
   methods: {
     changeLastName () {
       this.lastName += 'a'
+    },
+    change () {
+      this.nested.a.b = 148
+    }
+  },
+  watch: {
+    nested: {
+      deep: true,
+      handler (newVal) {
+        /* eslint-disable */
+        console.log('nested: ', newVal.a.b)
+      }
     }
   }
 }
