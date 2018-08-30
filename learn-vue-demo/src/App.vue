@@ -6,13 +6,14 @@
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+// import HelloWorld from './components/HelloWorld.vue'
+import vue from 'vue'
+vue.component('HelloWorld', () => import('./components/HelloWorld.vue'))
 export default {
-  name: 'app',
-  components: {
-    HelloWorld
-  }
+  name: 'app'
+  // components: {
+  //   'HelloWord': () => import('./components/HelloWorld.vue')
+  // }
 }
 </script>
 
