@@ -126,6 +126,19 @@ export function createComponent (
     return
   }
 
+  // qifa 异步组件
+  /**
+   * eg如下
+  Vue.component('async-example', function (resolve, reject) {
+   // 这个特殊的 require 语法告诉 webpack
+   // 自动将编译后的代码分割成不同的块，
+   // 这些块将通过 Ajax 请求自动下载。
+    require(['./my-async-component'], function(res){
+      resolve(res)
+    })
+  })
+  Vue.component('HelloWorld', () => import('../helloworld.vue'))
+   */
   // async component
   let asyncFactory
   if (isUndef(Ctor.cid)) {

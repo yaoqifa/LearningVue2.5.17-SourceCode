@@ -67,6 +67,7 @@ export function resolveAsyncComponent (
       }
     }
 
+    // qifa once 方法返回一个函数，里面有个闭包called，保证只执行一次
     const resolve = once((res: Object | Class<Component>) => {
       // cache resolved
       factory.resolved = ensureCtor(res, baseCtor)
@@ -76,7 +77,6 @@ export function resolveAsyncComponent (
         forceRender()
       }
     })
-
     const reject = once(reason => {
       process.env.NODE_ENV !== 'production' && warn(
         `Failed to resolve async component: ${String(factory)}` +
