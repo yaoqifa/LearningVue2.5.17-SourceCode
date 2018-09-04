@@ -10,9 +10,10 @@ import { initLifecycle, callHook } from './lifecycle'
 import { initProvide, initInjections } from './inject'
 import { extend, mergeOptions, formatComponentName } from '../util/index'
 
-// qifa 每个Vue的实例都有一个唯一的uid，包括Vue.extend扩展的实例
+// qifa 每个Vue的实例都有一个唯一的uid，包括Vue.extend扩展的实例也有一个uid
 let uid = 0
 
+/* qifa initMixin就做了一件事情，在Vue的原型上增加_init方法，构造Vue实例的时候会调用这个_init方法来初始化Vue实例*/
 export function initMixin (Vue: Class<Component>) {
   Vue.prototype._init = function (options?: Object) {
     // options长这样
@@ -64,10 +65,13 @@ export function initMixin (Vue: Class<Component>) {
     initLifecycle(vm)
     initEvents(vm)
     initRender(vm)
+    /* qifa 调用beforeCreate钩子函数并且触发beforeCreate钩子事件*/
     callHook(vm, 'beforeCreate')
     initInjections(vm) // resolve injections before data/props
-    initSt ate(vm)
+    /* qifa 初始化props、methods、data、computed与watch*/
+    initState(vm)
     initProvide(vm) // resolve provide after data/props
+    /* qifa 调用created钩子函数并且触发created钩子事件*/
     callHook(vm, 'created')
 
     /* istanbul ignore if */
@@ -133,7 +137,7 @@ function resolveModifiedOptions (Ctor: Class<Component>): ?Object {
   const extended = Ctor.extendOptions
   const sealed = Ctor.sealedOptions
   for (const key in latest) {
-    if (latest[key] !== sealed[key]) { 
+    if (latest[key] !== sealed[key]) {
       if (!modified) modified = {}
       modified[key] = dedupe(latest[key], extended[key], sealed[key])
     }
