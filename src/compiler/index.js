@@ -12,6 +12,7 @@ export const createCompiler = createCompilerCreator(function baseCompile (
   template: string,
   options: CompilerOptions
 ): CompiledResult {
+  // qifa 编译核心的3步 生成ast树 优化 生成code
   const ast = parse(template.trim(), options)
   if (options.optimize !== false) {
     optimize(ast, options)
