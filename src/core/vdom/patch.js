@@ -34,6 +34,7 @@ const hooks = ['create', 'activate', 'update', 'remove', 'destroy']
 
 function sameVnode (a, b) {
   return (
+    // qifa 这里的key 就是 我们书写的v-for时写的 :key, 如果没写的话，就是undefined === undefined
     a.key === b.key && (
       (
         a.tag === b.tag &&
@@ -41,6 +42,7 @@ function sameVnode (a, b) {
         isDef(a.data) === isDef(b.data) &&
         sameInputType(a, b)
       ) || (
+        // qifa 异步的 占位符节点
         isTrue(a.isAsyncPlaceholder) &&
         a.asyncFactory === b.asyncFactory &&
         isUndef(b.asyncFactory.error)
@@ -701,7 +703,7 @@ export function createPatchFunction (backend) {
       // qifa 负责渲染成DOM的函数
       createElm(vnode, insertedVnodeQueue)
     } else {
-      // qifa 有nodeType属性，证明是一个真实的dom节点
+      // qifa 有nodeType属性，证明是一个真实的dom节点，vnode节点是没有的
       const isRealElement = isDef(oldVnode.nodeType)
       if (!isRealElement && sameVnode(oldVnode, vnode)) {
         // patch existing root node
