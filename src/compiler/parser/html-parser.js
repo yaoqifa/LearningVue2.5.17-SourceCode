@@ -62,6 +62,7 @@ export function parseHTML (html, options) {
   const canBeLeftOpenTag = options.canBeLeftOpenTag || no
   let index = 0
   let last, lastTag
+  // qifa 遍历html的过程，通过advance前进，并通过栈 判断标签闭合
   while (html) {
     last = html
     // Make sure we're not in a plaintext content element like script/style
