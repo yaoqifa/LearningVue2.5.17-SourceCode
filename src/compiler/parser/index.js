@@ -21,6 +21,7 @@ import {
 
 export const onRE = /^@|^v-on:/
 export const dirRE = /^v-|^@|^:/
+// qifa 校验v-for 的正则
 export const forAliasRE = /([^]*?)\s+(?:in|of)\s+([^]*)/
 export const forIteratorRE = /,([^,\}\]]*)(?:,([^,\}\]]*))?$/
 const stripParensRE = /^\(|\)$/g
@@ -117,6 +118,7 @@ export function parse (
     start (tag, attrs, unary) {
       // check namespace.
       // inherit parent ns if there is one
+      // qifa  保存当前ast 书父节点
       const ns = (currentParent && currentParent.ns) || platformGetTagNamespace(tag)
 
       // handle IE svg bug
@@ -124,7 +126,7 @@ export function parse (
       if (isIE && ns === 'svg') {
         attrs = guardIESVGBug(attrs)
       }
-
+      // qifa 创建ast元素，下面对element做处理
       let element: ASTElement = createASTElement(tag, attrs, currentParent)
       if (ns) {
         element.ns = ns
