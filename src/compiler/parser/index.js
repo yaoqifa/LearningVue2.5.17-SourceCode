@@ -115,6 +115,7 @@ export function parse (
     shouldDecodeNewlines: options.shouldDecodeNewlines,
     shouldDecodeNewlinesForHref: options.shouldDecodeNewlinesForHref,
     shouldKeepComment: options.comments,
+    //qifa 元素创建，处理元素，构建ast树
     start (tag, attrs, unary) {
       // check namespace.
       // inherit parent ns if there is one
@@ -369,6 +370,7 @@ type ForParseResult = {
   iterator2?: string;
 };
 
+// qifa 解析 v-for="(value, index) in data"这样的标签
 export function parseFor (exp: string): ?ForParseResult {
   const inMatch = exp.match(forAliasRE)
   if (!inMatch) return

@@ -7,6 +7,9 @@
     <button @click="changeLastName">change last</button>
     <button @click="change">change nested</button>
 
+    <ul>
+      <li v-for="item in list" :key="item.id">{{item.name}}</li>
+    </ul>
   </div>
 </template>
 
@@ -15,6 +18,16 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
+      list: [
+        {
+          name: 'aaa',
+          id: 1
+        },
+        {
+          name: 'bbb',
+          id: 2
+        }
+      ],
       firstName: 'jhs',
       lastName: '123',
       nested: {
