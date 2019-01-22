@@ -42,7 +42,7 @@ export function initMixin (Vue: Class<Component>) {
     if (options && options._isComponent) {
       // optimize internal component instantiation 优化内部组件实例
       // since dynamic options merging is pretty slow, and none of the 因为动态options的合并非常慢
-      // internal component options needs special treatment. 都不需要特殊处理
+      // internal component options needs special treatment. 需要特殊处理
       initInternalComponent(vm, options)
     } else {
       // qifa 所以在程序里可以通过$options.el访问到 new 里传入的el， $options.data 访问到new Vue 中传入的data
