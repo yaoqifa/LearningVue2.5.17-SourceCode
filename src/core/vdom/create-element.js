@@ -88,7 +88,7 @@ export function _createElement (
     }
   }
 
-  // qifa 开始规范化Children， children最后变成一维数组
+  // qifa 开始规范化Children， children最后变成一维数组, 数组里每一项都是Vnode
   // support single function children as default scoped slot
   if (Array.isArray(children) && typeof children[0] === 'function') {
     data = data || {}
