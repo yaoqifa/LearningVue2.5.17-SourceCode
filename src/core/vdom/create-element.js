@@ -59,7 +59,7 @@ export function _createElement (
     https://cn.vuejs.org/v2/guide/render-function.html#约束
     那么创建一个空节点， data不能是响应式的
   */
-  if (isDef(data) && isDef((data: any).__ob__)) {
+  if (isDef(data) && isDef((data).__ob__)) {
     // process.env.NODE_ENV !== 'production' && warn(
     //   `Avoid using observed data object as vnode data: ${JSON.stringify(data)}\n` +
     //   'Always create fresh vnode data objects in each render!',
@@ -90,9 +90,7 @@ export function _createElement (
 
   // qifa 开始规范化Children， children最后变成一维数组
   // support single function children as default scoped slot
-  if (Array.isArray(children) &&
-    typeof children[0] === 'function'
-  ) {
+  if (Array.isArray(children) && typeof children[0] === 'function') {
     data = data || {}
     data.scopedSlots = { default: children[0] }
     children.length = 0
