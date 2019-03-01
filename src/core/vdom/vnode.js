@@ -1,4 +1,5 @@
 /* @flow */
+// vnode
 
 export default class VNode {
   tag: string | void;
@@ -17,7 +18,7 @@ export default class VNode {
   raw: boolean; // contains raw HTML? (server only)
   isStatic: boolean; // hoisted static node
   isRootInsert: boolean; // necessary for enter transition check
-  
+
   isComment: boolean; // empty comment placeholder?
   isCloned: boolean; // is a cloned node?
   isOnce: boolean; // is a v-once node?
