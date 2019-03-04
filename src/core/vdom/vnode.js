@@ -1,5 +1,4 @@
 /* @flow */
-// vnode
 
 export default class VNode {
   tag: string | void;
